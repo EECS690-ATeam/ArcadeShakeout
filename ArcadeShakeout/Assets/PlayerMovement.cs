@@ -5,10 +5,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-
-    public Rigidbody2D rb;
-
+    private Rigidbody2D rb;
     Vector2 movement;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        movement = rb.velocity;
+    }
 
     // Update is called once per frame
     void Update()
@@ -21,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     // Not tied to the frame rate like Update() is
     void FixedUpdate()
     {
-        // Movement
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
