@@ -6,11 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
+    private BoxCollider2D playerCollider;
     Vector2 movement;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
         movement = rb.velocity;
     }
 
@@ -26,5 +28,16 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision happened");
+
+        if (collision.gameObject.CompareTag("Skeleton"))
+        {
+            // Player dies
+            Destroy(gameObject);
+        }
     }
 }
