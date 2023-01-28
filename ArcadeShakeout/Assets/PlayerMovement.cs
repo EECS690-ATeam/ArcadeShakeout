@@ -22,13 +22,17 @@ public class PlayerMovement : MonoBehaviour
         // Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+
+
+        rb.velocity = new Vector2(movement.x * moveSpeed, movement.y * moveSpeed);
     }
 
-    // Not tied to the frame rate like Update() is
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
+    //// Not tied to the frame rate like Update() is
+    //void FixedUpdate()
+    //{
+    //    rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
