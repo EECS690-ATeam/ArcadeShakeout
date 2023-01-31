@@ -33,7 +33,7 @@ public class GhostMovement : MonoBehaviour
         this.direction = this.initialDirection;
         this.nextDirection = Vector2.zero;
         this.transform.position = this.startingPosition;
-        this.GetComponent<Rigidbody2D>().isKinematic = false;
+        this.GetComponent<Rigidbody>().isKinematic = false;
         this.enabled = true;
     }
 
@@ -46,9 +46,9 @@ public class GhostMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        Vector2 position = this.GetComponent<Rigidbody2D>().position;
+        Vector2 position = this.GetComponent<Rigidbody>().position;
         Vector2 translation = this.direction * this.speed * this.speedMultipler * Time.fixedDeltaTime;
-        this.GetComponent<Rigidbody2D>().MovePosition(position + translation);
+        this.GetComponent<Rigidbody>().MovePosition(position + translation);
 
     }
 
@@ -67,7 +67,7 @@ public class GhostMovement : MonoBehaviour
 
     public bool Occupied(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, Vector2.one * 32.0f, 0.0f, direction, 84.0f, this.obstacleLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, Vector2.one * 0.75f, 0.0f, direction, 1.5f, this.obstacleLayer);
         return hit.collider != null;
     }
  }
