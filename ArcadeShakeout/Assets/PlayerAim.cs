@@ -19,6 +19,8 @@ public class PlayerAim : MonoBehaviour
         Vector3 targetPosition = UtilsClass.GetMouseWorldPosition();
         Vector3 aimDir = (targetPosition - transform.position).normalized;
         fieldOfView.SetAimDirection(aimDir);
+        Debug.Log("checking");
         fieldOfView.SetOrigin(transform.position);
+        Debug.Log("after check");
     }
 }
