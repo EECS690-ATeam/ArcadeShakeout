@@ -16,8 +16,8 @@ TagManager:
   - BehindMask
   - OccludedObjects
   - Black
+  - NonOccludedObjects
   - Background
-  - 
   - 
   - 
   - 

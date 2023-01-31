@@ -30,6 +30,7 @@ public class FieldOfView : MonoBehaviour
         if (timer <= 0)
         {
             gameObject.SetActive(false);
+            timerText.text = string.Format("{0:F2}", 0);
         }
         else
         {
