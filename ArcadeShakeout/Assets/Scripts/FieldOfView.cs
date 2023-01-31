@@ -31,23 +31,25 @@ public class FieldOfView : MonoBehaviour
         Vector2[] uv = new Vector2[vertices.Length];
         int[] triangles = new int[rayCount * 3];
 
-        vertices[0] = origin;
+        vertices[0] = Vector3.zero;
 
         int vertexIndex = 1;
         int triangleIndex = 0;
         for(int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(origin, UtilsClass.GetVectorFromAngle(angle), viewDistance, layerMask);
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, UtilsClass.GetVectorFromAngle(angle), viewDistance, layerMask);
             if(raycastHit2D.collider == null)
             {
                 //No Hit
-                vertex = origin + UtilsClass.GetVectorFromAngle(angle) * viewDistance;
+                vertex = UtilsClass.GetVectorFromAngle(angle) * viewDistance;
+                vertex.z = transform.position.z;
             }
             else
             {
                 //Hit
-                vertex = raycastHit2D.point;
+                vertex = new Vector3(raycastHit2D.point.x, raycastHit2D.point.y, transform.position.z) - transform.position;
+                vertex.z = transform.position.z;
             }
             vertices[vertexIndex] = vertex;
 
