@@ -14,15 +14,10 @@ TagManager:
   - UI
   - Mask
   - BehindMask
-  - Objects
+  - OccludedObjects
   - Black
-<<<<<<< HEAD
   - NonOccludedObjects
   - Background
-=======
-  - Obstacle
-  - Node
->>>>>>> parent of ff1ea3f (Merge branch 'main' into Justin)
   - 
   - 
   - 
@@ -46,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2881497291
+    locked: 0
+  - name: Player
+    uniqueID: 386031351
     locked: 0
