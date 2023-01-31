@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using CodeMonkey.Utils;
-using TMPro;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -13,8 +11,6 @@ public class FieldOfView : MonoBehaviour
     private float viewDistance;
     private Vector3 origin;
     private float startingAngle;
-    public float timer = 10f;
-    public TextMeshProUGUI timerText;
     
     private void Start()
     {
@@ -23,20 +19,6 @@ public class FieldOfView : MonoBehaviour
         fov = 45f;
         viewDistance = 200f;
         origin = Vector3.zero;
-    }
-
-    private void Update()
-    {
-        if (timer <= 0)
-        {
-            gameObject.SetActive(false);
-            timerText.text = string.Format("{0:F2}", 0);
-        }
-        else
-        {
-            timer -= Time.deltaTime;
-            timerText.text = string.Format("{0:F2}", timer);
-        }
     }
     
     private void LateUpdate()
@@ -49,25 +31,23 @@ public class FieldOfView : MonoBehaviour
         Vector2[] uv = new Vector2[vertices.Length];
         int[] triangles = new int[rayCount * 3];
 
-        vertices[0] = Vector3.zero;
+        vertices[0] = origin;
 
         int vertexIndex = 1;
         int triangleIndex = 0;
         for(int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, UtilsClass.GetVectorFromAngle(angle), viewDistance, layerMask);
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(origin, UtilsClass.GetVectorFromAngle(angle), viewDistance, layerMask);
             if(raycastHit2D.collider == null)
             {
                 //No Hit
-                vertex = UtilsClass.GetVectorFromAngle(angle) * viewDistance;
-                vertex.z = transform.position.z;
+                vertex = origin + UtilsClass.GetVectorFromAngle(angle) * viewDistance;
             }
             else
             {
                 //Hit
-                vertex = new Vector3(raycastHit2D.point.x, raycastHit2D.point.y, transform.position.z) - transform.position;
-                vertex.z = transform.position.z;
+                vertex = raycastHit2D.point;
             }
             vertices[vertexIndex] = vertex;
 
@@ -97,11 +77,5 @@ public class FieldOfView : MonoBehaviour
     public void SetAimDirection(Vector3 aimDirection)
     {
         startingAngle = UtilsClass.GetAngleFromVectorFloat(aimDirection) + fov / 2f;
-    }
-
-    public void AddTime(float timeToAdd)
-    {
-        gameObject.SetActive(true);
-        timer += timeToAdd;
     }
 }
