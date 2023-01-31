@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using CodeMonkey.Utils;
+using TMPro;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class FieldOfView : MonoBehaviour
     private Vector3 origin;
     private float startingAngle;
     public float timer = 10f;
+    public TextMeshProUGUI timerText;
     
     private void Start()
     {
@@ -27,11 +30,12 @@ public class FieldOfView : MonoBehaviour
         if (timer <= 0)
         {
             gameObject.SetActive(false);
+            timerText.text = string.Format("{0:F2}", 0);
         }
         else
         {
             timer -= Time.deltaTime;
-            Debug.Log("The time left is: " + timer);
+            timerText.text = string.Format("{0:F2}", timer);
         }
     }
     
