@@ -11,6 +11,7 @@ public class FieldOfView : MonoBehaviour
     private float viewDistance;
     private Vector3 origin;
     private float startingAngle;
+    public float timer = 10f;
     
     private void Start()
     {
@@ -19,6 +20,19 @@ public class FieldOfView : MonoBehaviour
         fov = 45f;
         viewDistance = 200f;
         origin = Vector3.zero;
+    }
+
+    private void Update()
+    {
+        if (timer <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+            Debug.Log("The time left is: " + timer);
+        }
     }
     
     private void LateUpdate()
@@ -79,5 +93,11 @@ public class FieldOfView : MonoBehaviour
     public void SetAimDirection(Vector3 aimDirection)
     {
         startingAngle = UtilsClass.GetAngleFromVectorFloat(aimDirection) + fov / 2f;
+    }
+
+    public void AddTime(float timeToAdd)
+    {
+        gameObject.SetActive(true);
+        timer += timeToAdd;
     }
 }

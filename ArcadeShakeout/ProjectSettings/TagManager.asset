@@ -14,7 +14,7 @@ TagManager:
   - UI
   - Mask
   - BehindMask
-  - Objects
+  - OccludedObjects
   - Black
   - Background
   - 
