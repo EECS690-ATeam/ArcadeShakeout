@@ -13,8 +13,7 @@ public class FieldOfView : MonoBehaviour
     private float viewDistance;
     private Vector3 origin;
     private float startingAngle;
-    public float timer = 10f;
-    public TextMeshProUGUI timerText;
+    private FlashlightAnimation flashlightAnimation;
     
     private void Start()
     {
@@ -23,19 +22,14 @@ public class FieldOfView : MonoBehaviour
         fov = 45f;
         viewDistance = 200f;
         origin = Vector3.zero;
+        flashlightAnimation = FindObjectOfType<FlashlightAnimation>();
     }
 
     private void Update()
     {
-        if (timer <= 0)
+        if (flashlightAnimation.empty)
         {
             gameObject.SetActive(false);
-            timerText.text = string.Format("{0:F2}", 0);
-        }
-        else
-        {
-            timer -= Time.deltaTime;
-            timerText.text = string.Format("{0:F2}", timer);
         }
     }
     
@@ -98,10 +92,8 @@ public class FieldOfView : MonoBehaviour
     {
         startingAngle = UtilsClass.GetAngleFromVectorFloat(aimDirection) + fov / 2f;
     }
-
-    public void AddTime(float timeToAdd)
-    {
+    
+    public void pubSetActive() {
         gameObject.SetActive(true);
-        timer += timeToAdd;
     }
 }

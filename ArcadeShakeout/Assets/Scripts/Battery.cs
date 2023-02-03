@@ -5,9 +5,9 @@ using UnityEngine;
 public class Battery : MonoBehaviour
 {
     public FieldOfView fieldOfView;
-    public float timeToAdd = 10f;
     private Rigidbody2D rb;
     private BoxCollider2D batteryCollider;
+    private FlashlightAnimation flashlightAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,7 @@ public class Battery : MonoBehaviour
         fieldOfView = FindObjectOfType<FieldOfView>();
         rb = GetComponent<Rigidbody2D>();
         batteryCollider = GetComponent<BoxCollider2D>();
+        flashlightAnimation = FindObjectOfType<FlashlightAnimation>();
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class Battery : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            fieldOfView.AddTime(timeToAdd);
+            flashlightAnimation.batteryCollision();
             Destroy(gameObject);
         }
     }
