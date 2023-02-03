@@ -31,18 +31,30 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Set player facing direction
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector2 direction = new Vector2(
+            mousePosition.x - transform.position.x,
+            mousePosition.y - transform.position.y
+            );
+        transform.up = direction * -1;
+
         // Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+        // Calculate and normalize player movement
         rb.velocity = new Vector2(movement.x, movement.y);
         rb.velocity = rb.velocity.normalized * moveSpeed;
 
+        // Set aim direction
         Vector3 targetPosition = UtilsClass.GetMouseWorldPosition();
         Vector3 aimDir = (targetPosition - transform.position).normalized;
         fieldOfView.SetAimDirection(aimDir);
         fieldOfView.SetOrigin(transform.position);
 
+        // Animate walking only when walking
         isWalking = rb.velocity != Vector2.zero;
         animator.SetBool("IsWalking", isWalking);
     }
