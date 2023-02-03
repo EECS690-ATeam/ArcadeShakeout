@@ -24,7 +24,11 @@ public class FlashlightAnimation : MonoBehaviour {
 	}
 
 	void Update () {
-		if (index >= sprites.Length) return;
+		if (index >= (sprites.Length - 1))
+		{
+			empty = true;
+			return;
+		}
 		empty = false;
 		frame ++;
 		if (frame < framePerSprite) return;
@@ -33,7 +37,6 @@ public class FlashlightAnimation : MonoBehaviour {
 		frame = 0;
 		if (index >= sprites.Length) {
 			if (loop) index = 0;
-			empty = true;
 		}
 	}
 

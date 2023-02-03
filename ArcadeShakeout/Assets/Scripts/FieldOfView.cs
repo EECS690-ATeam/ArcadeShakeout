@@ -28,7 +28,10 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        transform.position = playerTransform.position;
+        if(playerTransform != null)
+        {
+            transform.position = playerTransform.position;
+        }
         if (flashlightAnimation.empty)
         {
             gameObject.SetActive(false);

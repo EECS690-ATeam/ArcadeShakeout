@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
+using System;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private FieldOfView fieldOfView;
 
+    public static event Action OnPlayerDeath;
     public float moveSpeed = 150f;
     private Rigidbody2D rb;
     private BoxCollider2D playerCollider;
     private Animator animator;
     private bool isWalking;
     Vector2 movement;
+    public UIManager playerUI;
+    //public Timer timeSurvived;
 
     // Called before Start()
     private void Awake()
@@ -65,6 +69,8 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Skeleton"))
         {
+            // Call game over screen
+            OnPlayerDeath?.Invoke();
             // Player dies
             Destroy(gameObject);
         }

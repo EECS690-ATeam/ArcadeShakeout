@@ -254,3 +254,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldOfView: {fileID: 0}
   moveSpeed: 75
+  playerUI: {fileID: 0}
