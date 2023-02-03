@@ -8,6 +8,7 @@ using TMPro;
 public class FieldOfView : MonoBehaviour
 {
     [SerializeField] private LayerMask layerMask;
+    public Transform playerTransform;
     private Mesh mesh;
     private float fov;
     private float viewDistance;
@@ -27,6 +28,7 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
+        transform.position = playerTransform.position;
         if (flashlightAnimation.empty)
         {
             gameObject.SetActive(false);
