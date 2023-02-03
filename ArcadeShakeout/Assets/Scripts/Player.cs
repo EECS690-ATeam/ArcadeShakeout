@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private bool isWalking;
     Vector2 movement;
     public UIManager playerUI;
-    //public Timer timeSurvived;
+    public Timer timeSurvived;
 
     // Called before Start()
     private void Awake()
@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Skeleton"))
         {
+            timeSurvived.updateTimer = false;
             // Call game over screen
             OnPlayerDeath?.Invoke();
             // Player dies
