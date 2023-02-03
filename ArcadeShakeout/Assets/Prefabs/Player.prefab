@@ -255,3 +255,4 @@ MonoBehaviour:
   fieldOfView: {fileID: 0}
   moveSpeed: 75
   playerUI: {fileID: 0}
+  timeSurvived: {fileID: 0}
