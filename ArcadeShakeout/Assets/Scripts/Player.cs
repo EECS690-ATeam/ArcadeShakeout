@@ -10,7 +10,15 @@ public class Player : MonoBehaviour
     public float moveSpeed = 150f;
     private Rigidbody2D rb;
     private BoxCollider2D playerCollider;
+    private Animator animator;
+    private bool isWalking;
     Vector2 movement;
+
+    // Called before Start()
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +42,9 @@ public class Player : MonoBehaviour
         Vector3 aimDir = (targetPosition - transform.position).normalized;
         fieldOfView.SetAimDirection(aimDir);
         fieldOfView.SetOrigin(transform.position);
+
+        isWalking = rb.velocity != Vector2.zero;
+        animator.SetBool("IsWalking", isWalking);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
