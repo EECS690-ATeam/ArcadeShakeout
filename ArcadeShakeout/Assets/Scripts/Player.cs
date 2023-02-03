@@ -27,7 +27,8 @@ public class Player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        rb.velocity = new Vector2(movement.x * moveSpeed, movement.y * moveSpeed);
+        rb.velocity = new Vector2(movement.x, movement.y);
+        rb.velocity = rb.velocity.normalized * moveSpeed;
 
         Vector3 targetPosition = UtilsClass.GetMouseWorldPosition();
         Vector3 aimDir = (targetPosition - transform.position).normalized;
